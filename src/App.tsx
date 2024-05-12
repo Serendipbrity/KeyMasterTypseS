@@ -11,8 +11,8 @@ function App() {
       <NavBar />
       <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/preset" element={<Preset />} />
+        <Route path="/KeyMasterTypseS" element={<Home />} />
+        <Route path="/KeyMasterTypseS/preset" element={<Preset />} />
       </Routes>
     </BrowserRouter>
   );
