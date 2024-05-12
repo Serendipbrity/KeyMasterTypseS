@@ -23,8 +23,8 @@ export default function Build() {
   const handleClose = () => setOpen(false);
 
   // Function to return the appropriate class name based on modal state
-  const getContainerClassName = () => {
-    return open ? "container blur-background" : "container";
+  const getBlurClass = () => {
+    return open ? "container blur-background" : "";
   };
   return (
     <>
@@ -32,13 +32,13 @@ export default function Build() {
         <a className="click-here" tabIndex={0}>
           Click here to start
         </a>
-        <div className="end-game-button">&times;</div>
+        <div className={`start-game-button ${getBlurClass()}`}>&times;</div>
       </div>
 
       <label htmlFor="shortcut-label" className="shortcut-label">
         Enter keys/shortcuts (e.g., A, Ctrl+C, Alt+Tab):
       </label>
-      <div className={`container ${open ? "blur-background" : ""}`}>
+      <div className={`container ${getBlurClass()}`}>
         <button className="clear">Clear</button>
         <textarea className="box" disabled>
           Keys will auto appeaer here
@@ -98,7 +98,7 @@ export default function Build() {
           </Box>
         </Modal>
       </div>
-      <button className="start-game-button">Start Game</button>
+      <button className={`start-game-button ${getBlurClass()}`}>Start Game</button>
     </>
   );
 }
