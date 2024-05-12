@@ -1,4 +1,5 @@
 import "../styles/Home.css";
+import {Link} from 'react-router-dom';
 
 export default function Home() {
   const presetButton = document.querySelector<HTMLButtonElement>(
@@ -29,8 +30,12 @@ export default function Home() {
       </div>
       <div className="choices">
         <div className="question">Which would you like to do?</div>
-        <button className="build-own-button">Build you own game.</button>
-        <button className="play-preset-button">Play a preset game.</button>
+              <Link to="/KeyMasterTypseS/build">
+              <button className="build-own-button">Build you own game.</button></Link>
+              <Link to="/KeyMasterTypseS/preset">
+              <button className="play-preset-button">Play a preset game.</button>
+              </Link>
+      
         <button className="mac-button hide">Mac</button>
         <button className="windows-button hide">Windows</button>
       </div>
