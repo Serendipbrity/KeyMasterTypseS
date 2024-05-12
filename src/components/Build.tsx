@@ -1,5 +1,5 @@
 import "../styles/Build.css";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
@@ -18,12 +18,12 @@ export default function Build() {
     zIndex: 1000,
   };
 
-  const [keyCombo, setKeyCombo] = useState([]);
+  const [keyCombo, setKeyCombo] = useState<string[]>([]);
   const [name, setName] = useState("");
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const recordedKeyPresses = (event) => {
+    const recordedKeyPresses = (event: KeyboardEvent) => {
       console.log(`Key pressed: ${event.key}`);
       setKeyCombo((prevKeys) => [...prevKeys, event.key]);
     };
@@ -53,7 +53,8 @@ export default function Build() {
     
   const handleModalSave = () => {
       localStorage.setItem(name, JSON.stringify(keyCombo));
-      handleClear();
+      handleClear(); // clear the key combo box after saving
+      setName(""); // Clear the name field after saving
     handleModalClose();
   };
 
