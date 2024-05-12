@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Box, Tabs } from "@mui/material";
 import { useLocation } from 'react-router-dom';
 import '../styles/NavBar.css';
@@ -25,9 +25,9 @@ export default function NavBar() {
         aria-label="navigation tabs example"
         role="navigation"
       >
-        <LinkTab label="Home" to="/" />
-        <LinkTab label="Build Your Own" to="/build" />
-        <LinkTab label="Play Preset" to="/preset" />
+        <LinkTab label="Home" to="/KeyMasterTypseS/" />
+        <LinkTab label="Build Your Own" to="/KeyMasterTypseS/build" />
+        <LinkTab label="Play Preset" to="/KeyMasterTypseS/preset" />
       </Tabs>
     </Box>
   );
