@@ -6,9 +6,9 @@ import LinkTab from './LinkTab'; // Assuming LinkTab is in the same directory
 
 export default function NavBar() {
   const location = useLocation();
-  const [value, setValue] = useState(location.pathname);
+  const [value, setValue] = useState<string>(location.pathname);
 
-  const handleChange = (_:unknown, newValue) => {
+  const handleChange = (_: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
 
