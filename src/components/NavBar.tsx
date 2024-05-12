@@ -1,14 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Tabs } from "@mui/material";
+import { useLocation } from 'react-router-dom';
 import '../styles/NavBar.css';
 import LinkTab from './LinkTab'; // Assuming LinkTab is in the same directory
 
 export default function NavBar() {
-  const [value, setValue] = useState(0);
+  const location = useLocation();
+  const [value, setValue] = useState(location.pathname);
 
-  const handleChange = (_: React.SyntheticEvent, newValue: number) => {
+  const handleChange = (_:unknown, newValue) => {
     setValue(newValue);
   };
+
+   // Effect to update the tab state based on the current location
+   useEffect(() => {
+    setValue(location.pathname);
+  }, [location]);
 
   return (
     <Box className="box-container">
