@@ -1,0 +1,11 @@
+h1.header {
+    display: flex;
+    justify-content: center;
+    margin: 5% auto 0;
+}
+
+@media (max-width: 991px) {
+    h1.header {
+        margin: 15% auto 0;
+    }
+}
