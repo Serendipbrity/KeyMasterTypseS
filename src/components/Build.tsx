@@ -1,5 +1,5 @@
 import "../styles/Build.css";
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
@@ -18,87 +18,86 @@ export default function Build() {
     zIndex: 1000,
   };
 
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [keyCombo, setKeyCombo] = useState([]);
+  const [name, setName] = useState("");
+  const [open, setOpen] = useState(false);
 
-  // Function to return the appropriate class name based on modal state
-  const getBlurClass = () => {
-    return open ? "container blur-background" : "";
+  useEffect(() => {
+    const recordedKeyPresses = (event) => {
+      console.log(`Key pressed: ${event.key}`);
+      setKeyCombo((prevKeys) => [...prevKeys, event.key]);
+    };
+
+    // Only add the event listener when the modal is not open
+    if (!open) {
+      window.addEventListener("keydown", recordedKeyPresses);
+    }
+
+    // Remove the event listener when the component unmounts or when the modal opens
+    return () => {
+      window.removeEventListener("keydown", recordedKeyPresses);
+    };
+  }, [open]); // The useEffect depends on the 'open' state
+
+  const handleSave = () => {
+    setOpen(true);
   };
+
+  const handleModalClose = () => {
+    setOpen(false);
+  };
+
+  const handleClear = () => {
+    setKeyCombo([]);
+  };
+    
+  const handleModalSave = () => {
+      localStorage.setItem(name, JSON.stringify(keyCombo));
+      handleClear();
+    handleModalClose();
+  };
+
+
   return (
     <>
-      <div className={`end-and-click-here-buttons ${getBlurClass()}`}>
-        <a className="click-here" tabIndex={0}>
-          Click here to start
-        </a>
-        <div className="end-game-button">&times;</div>
-      </div>
-
+      <div className="end-game-button" onClick={handleModalClose}>&times;</div>
+      <a className="click-here" tabIndex={0}>
+        Click here to start
+      </a>
       <label htmlFor="shortcut-label" className="shortcut-label">
         Enter keys/shortcuts (e.g., A, Ctrl+C, Alt+Tab):
       </label>
-      <div className={`container ${getBlurClass()}`}>
-        <button className="clear">Clear</button>
-        <textarea className="box" disabled>
-          Keys will auto appeaer here
-        </textarea>
-
-        {/* Modal */}
-        <button onClick={handleOpen} className="save">
+      <div className="container">
+        <button className="clear" onClick={handleClear}>
+          Clear
+        </button>
+        <textarea className="box" disabled value={keyCombo.length > 0 ? keyCombo.join(", ") : "Keys will auto appear here"} />
+        <button onClick={handleSave} className="save">
           Save
         </button>
-        <Modal open={open} onClose={handleClose}>
+        <Modal open={open} onClose={handleModalClose}>
           <Box sx={style}>
-            <Typography
-              id="modal-modal-title"
-              variant="h6"
-              component="h2"
-              className="modal-header"
-            >
+            <Typography id="modal-modal-title" variant="h6" component="h2">
               Enter a name / description
             </Typography>
-            {/* <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography> */}
-
-            <button
-              type="button"
-              className="modal-btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-              onClick={handleClose}
-            >
-              x
-            </button>
             <input
               type="text"
               className="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               placeholder="Enter a name / description"
             />
-
             <div className="modal-footer">
-              <button
-                type="button"
-                className="btn-secondary"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-                onClick={handleClose}
-              >
+              <button type="button" className="btn-secondary" onClick={handleModalClose}>
                 Close
               </button>
-              <button
-                type="button"
-                className="btn-primary modal-save-button"
-                data-bs-dismiss="modal"
-              >
+              <button type="button" className="btn-primary modal-save-button" onClick={handleModalSave}>
                 Save
               </button>
             </div>
           </Box>
         </Modal>
       </div>
-      <button className={`start-game-button ${getBlurClass()}`}>Start Game</button>
     </>
   );
 }
