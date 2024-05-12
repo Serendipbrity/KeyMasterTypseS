@@ -28,11 +28,11 @@ export default function Build() {
   };
   return (
     <>
-      <div className="end-and-click-here-buttons">
+      <div className={`end-and-click-here-buttons ${getBlurClass()}`}>
         <a className="click-here" tabIndex={0}>
           Click here to start
         </a>
-        <div className={`start-game-button ${getBlurClass()}`}>&times;</div>
+        <div className="end-game-button">&times;</div>
       </div>
 
       <label htmlFor="shortcut-label" className="shortcut-label">
