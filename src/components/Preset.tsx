@@ -1,4 +1,4 @@
-import React from "react";
+
 import "../styles/Preset.css";
 
 export default function Preset() {
