@@ -1,4 +1,4 @@
-.preset-container {
+.game-container {
     padding: 20px;
 }
 .disclaimer {
@@ -22,7 +22,6 @@
 }
 
 .answer {
-    margin: 2%;
     letter-spacing: 1px;
     font-size: 1.3em;
     color: blue;
@@ -30,6 +29,14 @@
     justify-content: center;
     display: inline-block;
     position: relative;
+}
+
+.name-of-key, .game-key-name {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    font-size: 2em;
+    font-weight: 700;
 }
 
 .end-game-button {

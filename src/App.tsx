@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Home from './components/Home'; 
 import Preset from './components/Preset'; 
 import Build from './components/Build'; 
+import Game from './components/Game'; 
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route path="/KeyMasterTypseS" element={<Home />} />
         <Route path="/KeyMasterTypseS/preset" element={<Preset />} />
         <Route path="/KeyMasterTypseS/build" element={<Build />} />
+        <Route path="/KeyMasterTypseS/game" element={<Game />} />
       </Routes>
     </BrowserRouter>
   );

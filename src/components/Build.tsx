@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import { Link } from "react-router-dom";
 
 export default function Build() {
   const style = {
@@ -75,7 +76,8 @@ export default function Build() {
         <textarea className="box" disabled value={keyCombo.length > 0 ? keyCombo.join(", ") : "Keys will auto appear here"} />
         <button onClick={handleSave} className="save">
           Save
-        </button>
+              </button>
+
         <Modal open={open} onClose={handleModalClose}>
           <Box sx={style}>
             <Typography id="modal-modal-title" variant="h6" component="h2">
@@ -98,7 +100,9 @@ export default function Build() {
             </div>
           </Box>
         </Modal>
-      </div>
+          </div>
+          <Link to="/KeyMasterTypseS/play-built-game">
+          <button className="start-game-button">Start Game</button></Link>
     </>
   );
 }
