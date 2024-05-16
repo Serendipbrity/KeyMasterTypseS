@@ -40,15 +40,6 @@
   font-weight: 700;
 }
 
-.end-game-button {
-  float: right;
-  width: auto;
-  cursor: pointer;
-}
-
-.end-game-button:hover {
-  cursor: pointer;
-}
 
 .content {
   max-width: 100%; /* Prevents it from extending beyond its container */
@@ -59,12 +50,6 @@
   padding: 10px; /* Adds some padding for better readability */
   border-radius: 4px; /* Optional: Rounds the corners for aesthetic purposes */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Adds subtle shadow for depth */
-}
-
-.start-game-button,
-.next-button {
-  width: UTO; /* Making buttons a bit narrower than the card for aesthetics */
-  margin: 10px auto; /* Centering buttons horizontally */
 }
 
 .game-card {

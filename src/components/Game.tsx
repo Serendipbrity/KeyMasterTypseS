@@ -26,9 +26,15 @@ export default function Game({ keys, onTellMe, onNext }: GameProps) {
         </button>
         <div className="answer">{}</div>
         <div className="game-key-name">{keys[currentKey].name}</div>
-        <button className="end-game-button" aria-label="Close">
-          &#215;
-        </button>
+        <button
+        className="next-button"
+        onClick={() => {
+          onNext();
+          setCurrentKey((prevKey) => (prevKey + 1) % keys.length);
+        }}
+      >
+        Next
+      </button>
       </div>
 
       <div className="disclaimer">
@@ -59,15 +65,6 @@ export default function Game({ keys, onTellMe, onNext }: GameProps) {
         async
         src="https://cpwebassets.codepen.io/assets/embed/ei.js"
       ></script>
-      <button
-        className="next-button"
-        onClick={() => {
-          onNext();
-          setCurrentKey((prevKey) => (prevKey + 1) % keys.length);
-        }}
-      >
-        Next
-      </button>
     </div>
   );
 }

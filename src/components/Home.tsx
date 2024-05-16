@@ -32,7 +32,7 @@ export default function Home() {
         <div className="question">Which would you like to do?</div>
               <Link to="/KeyMasterTypseS/build">
               <button className="build-own-button">Build you own game.</button></Link>
-              <Link to="/KeyMasterTypseS/preset">
+              <Link to="/KeyMasterTypseS/play-preset-game">
               <button className="play-preset-button">Play a preset game.</button>
               </Link>
       

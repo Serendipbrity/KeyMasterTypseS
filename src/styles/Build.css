@@ -10,16 +10,6 @@
     margin: auto;
 }
 
-.end-game-button {
-    position: relative;
-    left: 4%;
-    font-size: 24px;
-}
-
-.end-game-button:hover {
-    cursor: pointer;
-}
-
 .shortcut-label{
     display: flex;
     justify-content: center;
