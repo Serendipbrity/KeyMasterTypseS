@@ -1,8 +1,13 @@
 import { useState, useEffect } from "react";
 import Game from "./Game";
 
+interface Key {
+  name: string;
+  sequence: string[];
+}
+
 // preset options for Mac
-const macPresetKeys = [
+const macPresetKeys: Key[] = [
   { name: "Copy", sequence: ["Meta", "c"] },
   { name: "Paste", sequence: ["Meta", "v"] },
 ];
@@ -14,7 +19,7 @@ export default function Preset() {
   const [userAttempts, setUserAttempts] = useState<string[]>([]);
 
   // Function to handle the "Tell Me" button click
-  const handleTellMe = (keyIndex) => {
+  const handleTellMe = (keyIndex: number) => {
     const currentKeySequence = macPresetKeys[keyIndex].sequence;
     const updatedKeySequence = currentKeySequence.map(key =>
       key === "Meta" ? "Command" : key

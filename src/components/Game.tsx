@@ -1,7 +1,18 @@
 import "../styles/Game.css";
 import { useState } from "react";
 
-export default function Game({ keys, onTellMe, onNext }) {
+interface Key {
+  name: string;
+  sequence: string[];
+}
+
+interface GameProps {
+  keys: Key[];
+  onTellMe: (keyIndex: number) => void;
+  onNext: () => void;
+}
+
+export default function Game({ keys, onTellMe, onNext }: GameProps) {
   const [currentKey, setCurrentKey] = useState(0);
 
   return (
