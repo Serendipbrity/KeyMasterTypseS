@@ -34,6 +34,7 @@ export default function Build() {
       window.addEventListener("keydown", recordedKeyPresses);
     }
 
+    // elements to blur when modal is open
     const saveBtn = document.querySelector(".save") as HTMLElement;
     const clearBtn = document.querySelector(".clear") as HTMLElement;
     const textBox = document.querySelector(".box") as HTMLElement;
@@ -41,17 +42,17 @@ export default function Build() {
     const clickHere = document.querySelector(".click-here") as HTMLElement;
     const startGameBtn = document.querySelector(".click-here") as HTMLElement;
     const elements = [saveBtn, clearBtn, textBox, shortcutLabel, clickHere, startGameBtn];
-
+// loop over the elements and add the blur-background class when the modal is open
     elements.forEach(element => {
       if (open) {
         element.classList.add("blur-background");
       } else {
+        // remove the blur-background class when the modal is closed
         element.classList.remove("blur-background");
       }
     });
-    
 
-    // Remove the event listener when the component unmounts or when the modal opens
+    // Remove the event listener when the component unmounts or when the modal opens so it stops recording key presses
     return () => {
       window.removeEventListener("keydown", recordedKeyPresses);
     };

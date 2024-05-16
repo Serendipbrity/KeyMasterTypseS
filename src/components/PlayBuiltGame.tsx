@@ -64,10 +64,12 @@ export default function PlayBuiltGame() {
     }
 
     return (
+        <div className="content-container">
         <Game 
             keys={keys} 
             onTellMe={() => handleTellMe(keys[currentKeyIndex]?.sequence)} 
             onNext={handleNext}
-        />
+            />
+        </div>
     );
 }
