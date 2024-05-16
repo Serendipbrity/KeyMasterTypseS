@@ -4,7 +4,8 @@ import { Tab } from "@mui/material";
 
 interface LinkTabProps {
   label: string;
-  to: string;  // Changing `href` to `to` for clarity and consistency with `Link` usage
+    to: string;  
+    value: string;
 }
 
 // Using Link as component requires forwarding ref due to how MUI manages refs for its components

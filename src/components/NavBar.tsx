@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Box, Tabs } from "@mui/material";
 import { useLocation } from 'react-router-dom';
 import '../styles/NavBar.css';
-import LinkTab from './LinkTab'; // Assuming LinkTab is in the same directory
+import LinkTab from './LinkTab'; 
 
 export default function NavBar() {
   const location = useLocation();
@@ -25,9 +25,9 @@ export default function NavBar() {
         aria-label="navigation tabs example"
         role="navigation"
       >
-        <LinkTab label="Home" to="/KeyMasterTypseS/" />
-        <LinkTab label="Build Your Own" to="/KeyMasterTypseS/build" />
-        <LinkTab label="Play Preset" to="/KeyMasterTypseS/preset" />
+        <LinkTab label="KeyMaster" value="/KeyMasterTypseS/" to="/KeyMasterTypseS/" />
+        <LinkTab label="Build Your Own" value="/KeyMasterTypseS/build" to="/KeyMasterTypseS/build" />
+        <LinkTab label="Play Preset" value="/KeyMasterTypseS/play-preset-game" to="/KeyMasterTypseS/play-preset-game" />
       </Tabs>
     </Box>
   );

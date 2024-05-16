@@ -62,6 +62,7 @@ export default function Build() {
 
   return (
     <>
+      <div className="content-container">
       <div className="end-game-button" onClick={handleModalClose}>&times;</div>
       <a className="click-here" tabIndex={0}>
         Click here to start
@@ -103,6 +104,7 @@ export default function Build() {
           </div>
           <Link to="/KeyMasterTypseS/play-built-game">
           <button className="start-game-button">Start Game</button></Link>
+      </div>
     </>
   );
 }

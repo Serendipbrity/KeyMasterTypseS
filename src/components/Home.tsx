@@ -21,7 +21,7 @@ export default function Home() {
   }
 
   return (
-    <div className="home">
+    <div className="content-container">
       <div className="intro">Welcome to KeyMaster</div>
       <div className="desc">
         KeyMaster is a game that is meant to help you develop muscle memory for

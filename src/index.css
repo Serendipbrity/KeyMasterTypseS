@@ -2,15 +2,16 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
+  background-color: rgba(0, 0, 0, 0.6);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+.content-container {
+    margin: 10% auto 0;
 }
 
 a {
@@ -41,13 +42,28 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: rgba(0, 0, 0, 0.6);
   cursor: pointer;
   transition: border-color 0.25s;
+  position: relative;
 }
+button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  box-shadow: 0 4px 8px rgba(206, 203, 203, 0.2), 0 -4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px; /* Adjust to match the button's border-radius */
+  z-index: -1;
+  pointer-events: none;
+}
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
