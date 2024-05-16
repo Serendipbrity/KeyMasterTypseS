@@ -34,6 +34,23 @@ export default function Build() {
       window.addEventListener("keydown", recordedKeyPresses);
     }
 
+    const saveBtn = document.querySelector(".save") as HTMLElement;
+    const clearBtn = document.querySelector(".clear") as HTMLElement;
+    const textBox = document.querySelector(".box") as HTMLElement;
+    const shortcutLabel = document.querySelector(".shortcut-label") as HTMLElement;
+    const clickHere = document.querySelector(".click-here") as HTMLElement;
+    const startGameBtn = document.querySelector(".click-here") as HTMLElement;
+    const elements = [saveBtn, clearBtn, textBox, shortcutLabel, clickHere, startGameBtn];
+
+    elements.forEach(element => {
+      if (open) {
+        element.classList.add("blur-background");
+      } else {
+        element.classList.remove("blur-background");
+      }
+    });
+    
+
     // Remove the event listener when the component unmounts or when the modal opens
     return () => {
       window.removeEventListener("keydown", recordedKeyPresses);
