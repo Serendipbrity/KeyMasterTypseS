@@ -9,7 +9,6 @@ interface Key {
 export default function PlayBuiltGame() { 
   const [currentKeyIndex, setCurrentKeyIndex] = useState(0);
   const [userAttempts, setUserAttempts] = useState<string[]>([]);
-  console.log(userAttempts);
   const [keys, setKeys] = useState<Key[]>([]);
 
   useEffect(() => {
@@ -75,6 +74,14 @@ export default function PlayBuiltGame() {
         onTellMe={() => handleTellMe(keys[currentKeyIndex]?.sequence)} 
         onNext={handleNext}
       />
+      <div>
+        <h3>User Attempts:</h3>
+        <ul>
+          {userAttempts.map((attempt, index) => (
+            <li key={index}>{attempt}</li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
