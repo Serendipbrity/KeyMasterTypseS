@@ -17,11 +17,12 @@ export default function Preset() {
   const [currentKeyIndex, setCurrentKeyIndex] = useState(0);
   // store the user's key attempts
   const [userAttempts, setUserAttempts] = useState<string[]>([]);
+  console.log(userAttempts);
 
   // Function to handle the "Tell Me" button click
   const handleTellMe = (keyIndex: number) => {
     const currentKeySequence = macPresetKeys[keyIndex].sequence;
-    const updatedKeySequence = currentKeySequence.map(key =>
+    const updatedKeySequence = currentKeySequence.map((key) =>
       key === "Meta" ? "Command" : key
     );
     alert(`The shortcut is: ${updatedKeySequence.join(" + ")}`);
@@ -37,35 +38,49 @@ export default function Preset() {
     const handleKeyDown = (event: KeyboardEvent) => {
       setUserAttempts((prevAttempts) => {
         const newAttempts = [...prevAttempts, event.key];
-        const isCorrect = macPresetKeys[currentKeyIndex].sequence.every((key, index) =>
-          newAttempts[newAttempts.length - macPresetKeys[currentKeyIndex].sequence.length + index] === key
+        const isCorrect = macPresetKeys[currentKeyIndex].sequence.every(
+          (key, index) =>
+            newAttempts[
+              newAttempts.length -
+                macPresetKeys[currentKeyIndex].sequence.length +
+                index
+            ] === key
         );
 
-        if (newAttempts.length > macPresetKeys[currentKeyIndex].sequence.length) {
+        if (
+          newAttempts.length > macPresetKeys[currentKeyIndex].sequence.length
+        ) {
           newAttempts.shift();
         }
 
-        if (isCorrect && newAttempts.length === macPresetKeys[currentKeyIndex].sequence.length) {
-          alert('Correct!');
+        if (
+          isCorrect &&
+          newAttempts.length === macPresetKeys[currentKeyIndex].sequence.length
+        ) {
+          alert("Correct!");
           handleNext(); // Advance to the next key sequence
         }
         return newAttempts;
       });
     };
 
-    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
     return () => {
-      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, [currentKeyIndex]);
 
   return (
     <div className="content-container">
-      <Game
-        keys={macPresetKeys}
-        onTellMe={handleTellMe}
-        onNext={handleNext}
-      />
+      <Game keys={macPresetKeys} onTellMe={handleTellMe} onNext={handleNext} />
+      <div>
+        <h3>User Attempts:</h3>
+        <ul>
+          {userAttempts.map((attempt, index) => (
+            <li key={index}>{attempt}</li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
