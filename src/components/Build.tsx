@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 export default function Build() {
   
   function handleRefresh() {
+    window.location.assign("https://serendipbrity.github.io/KeyMasterTypseS/");
     window.location.assign("https://serendipbrity.github.io/KeyMasterTypseS/build");
   }
         // Call the function on page load
