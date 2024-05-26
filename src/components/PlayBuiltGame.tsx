@@ -1,24 +1,30 @@
-import { useState, useEffect, useCallback } from 'react';
-import Game from './Game';
+import { useState, useEffect, useCallback, useRef } from "react";
+import Game from "./Game";
 
 interface Key {
   name: string;
   sequence: string[];
 }
 
-export default function PlayBuiltGame() { 
+export default function PlayBuiltGame() {
   const [currentKeyIndex, setCurrentKeyIndex] = useState(0);
   const [userAttempts, setUserAttempts] = useState<string[]>([]);
   const [keys, setKeys] = useState<Key[]>([]);
 
+  // Refs to hold the latest values of keys and currentKeyIndex
+  const keysRef = useRef<Key[]>(keys);
+  const currentKeyIndexRef = useRef<number>(currentKeyIndex);
+
   useEffect(() => {
     const loadKeys = () => {
       try {
-        const loadedKeys: Key[] = Object.keys(localStorage).map(key => {
+        const loadedKeys: Key[] = Object.keys(localStorage).map((key) => {
+          // Clear debug so that it doesn't interfere with the game
+          localStorage.removeItem("debug");
           const item = localStorage.getItem(key);
           return {
             name: key,
-            sequence: item ? JSON.parse(item) : []
+            sequence: item ? JSON.parse(item) : [],
           };
         });
         if (loadedKeys.length > 0) {
@@ -35,33 +41,51 @@ export default function PlayBuiltGame() {
     loadKeys();
   }, []);
 
-  const handleTellMe = (sequence: string[]) => {
+  // Update refs when state changes
+  useEffect(() => {
+    keysRef.current = keys;
+  }, [keys]);
+
+  useEffect(() => {
+    currentKeyIndexRef.current = currentKeyIndex;
+  }, [currentKeyIndex]);
+
+  const handleTellMe = useCallback((sequence: string[]) => {
     alert(`The correct keys for this action are: ${sequence.join(" + ")}`);
-  };
+  }, []);
 
   const handleNext = useCallback(() => {
-    setCurrentKeyIndex((prevIndex) => (prevIndex + 1) % keys.length);
-    setUserAttempts([]);
-  }, [keys.length]);
+    setCurrentKeyIndex((prevIndex) => (prevIndex + 1) % keysRef.current.length);
+    setUserAttempts([]); // Clear user attempts
+    console.log(currentKeyIndexRef);
+  }, []);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       setUserAttempts((prevAttempts) => {
         const newAttempts = [...prevAttempts, event.key];
-        const correctSequence = keys[currentKeyIndex]?.sequence || [];
-        if (newAttempts.slice(-correctSequence.length).join('') === correctSequence.join('')) {
-          alert('Correct!');
-          handleNext();
+        const correctSequence =
+          keysRef.current[currentKeyIndexRef.current]?.sequence || [];
+
+        if (
+          newAttempts.slice(-correctSequence.length).join("") ===
+          correctSequence.join("")
+        ) {
+          alert("Correct!");
+          setUserAttempts([]); // Clear attempts immediately
+          setCurrentKeyIndex(
+            (prevIndex) => (prevIndex + 1) % keysRef.current.length
+          ); // Move to next key
         }
         return newAttempts;
       });
     };
 
-    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener("keydown", handleKeyDown);
     return () => {
-      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [handleNext, keys, currentKeyIndex]);
+  }, [handleNext]);
 
   if (keys.length === 0) {
     return <div>Loading keys or no keys available...</div>;
@@ -69,9 +93,9 @@ export default function PlayBuiltGame() {
 
   return (
     <div className="content-container">
-      <Game 
-        keys={keys} 
-        onTellMe={() => handleTellMe(keys[currentKeyIndex]?.sequence)} 
+      <Game
+        keys={keys}
+        onTellMe={() => handleTellMe(keys[currentKeyIndex]?.sequence)}
         onNext={handleNext}
       />
       <div>

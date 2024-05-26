@@ -81,7 +81,6 @@ export default function Build() {
   return (
     <>
       <div className="content-container">
-      <div className="end-game-button" onClick={handleModalClose}>&times;</div>
       <a className="click-here" tabIndex={0}>
         Click here to start
       </a>
