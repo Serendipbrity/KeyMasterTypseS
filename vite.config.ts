@@ -8,7 +8,7 @@ export default defineConfig({
   build: {
     outDir: 'dist',  // Ensures that the build output goes to the 'dist' directory
   },
-  server: {
-    open: true
-  }
+  // server: {
+  //   open: true
+  // }
 })
