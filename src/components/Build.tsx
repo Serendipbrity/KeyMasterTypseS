@@ -6,6 +6,12 @@ import Modal from "@mui/material/Modal";
 import { Link } from "react-router-dom";
 
 export default function Build() {
+  
+  function handleRefresh() {
+    window.location.assign("https://serendipbrity.github.io/KeyMasterTypseS/build");
+  }
+        // Call the function on page load
+        window.addEventListener('load', handleRefresh);
   const style = {
     position: "absolute",
     top: "50%",
