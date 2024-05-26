@@ -7,6 +7,13 @@ interface Key {
 }
 
 export default function PlayBuiltGame() {
+  // Function to remove the unwanted localStorage item on page load
+  function removeUnwantedLocalStorageItem() {
+    localStorage.removeItem("debug");
+  }
+
+  // Call the function on page load
+  window.addEventListener("load", removeUnwantedLocalStorageItem);
   const [currentKeyIndex, setCurrentKeyIndex] = useState(0);
   const [userAttempts, setUserAttempts] = useState<string[]>([]);
   const [keys, setKeys] = useState<Key[]>([]);

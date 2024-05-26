@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { useEffect } from 'react';
 import NavBar from './components/NavBar';
 import Home from './components/Home'; 
 import PlayPresetGame from './components/PlayPresetGame'; 
@@ -7,6 +8,15 @@ import PlayBuiltGame from './components/PlayBuiltGame';
 
 
 function App() {
+  useEffect(() => {
+    // Function to remove the unwanted localStorage item
+    const removeUnwantedLocalStorageItem = () => {
+      localStorage.removeItem('debug');
+    };
+
+    // Call the function on component mount
+    removeUnwantedLocalStorageItem();
+  }, []);
   return (
     <BrowserRouter>
       <NavBar />
